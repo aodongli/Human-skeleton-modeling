@@ -80,9 +80,6 @@ class Skeleton:
         xs = self.mu[:,0]
         ys = self.mu[:,2]
         zs = self.mu[:,1]
-        # print(np.max(xs), np.min(xs))
-        # print(np.max(ys), np.min(ys))
-        # print(np.max(zs), np.min(zs))
 
         for i in range(joint.shape[1]):
             j1 = joint[0,i]
@@ -96,51 +93,17 @@ class Skeleton:
         ax.set_xlim3d(-0.5, 0.55)
         ax.set_ylim3d(-2.2, 3.5)
         ax.set_zlim3d(-1.5, 1.0)
-        # ax.set_xlim3d(np.min(xs), np.max(xs))
-        # ax.set_ylim3d(np.min(ys), np.max(zs))
-        # ax.set_zlim3d(np.min(zs), np.max(zs))
         plt.savefig('./figs/ave_skeleton.jpg')
 
 
 def main():
     mat = load_skeleton_data()
     skeleton = Skeleton(mat)
-    # print skeleton.det_cov_1d
-    # print skeleton.det_cov_2d
-    # print skeleton.det_cov_2d[0,1], skeleton.det_cov_2d[0,7]
-    # print skeleton.mutual_info[0,1], skeleton.mutual_info[0,7]
     cl = ChowLiu(skeleton.mutual_info)
     span_mat = cl.max_span()
 
     skeleton.plot_mean_skeleton()
-    # joint pair
-    # joint = np.array([[1, 2, 3, 2, 5, 6, 7, 2, 9,  10, 11, 
-    #         4, 13, 14, 15, 4,  17, 18, 19], [2, 3, 4, 5, 6, 7, 8, 9, 
-    #         10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]])
-    # joint = joint - 1
-
-    # fig = plt.figure(figsize=(8,8))
-    # ax = fig.add_subplot(111, projection='3d')
-    # xs = skeleton.mu[:,0]
-    # ys = skeleton.mu[:,2]
-    # zs = skeleton.mu[:,1]
-    # print(np.max(xs), np.min(xs))
-    # print(np.max(ys), np.min(ys))
-    # print(np.max(zs), np.min(zs))
-
-    # for i in range(joint.shape[1]):
-    #     j1 = joint[0,i]
-    #     j2 = joint[1,i]
-    #     ax.plot((xs[j1], xs[j2]), (ys[j1], ys[j2]), (zs[j1], zs[j2]), 'b')
-
-    # ax.scatter(xs, ys, zs)
-    # ax.set_xlabel('X Label')
-    # ax.set_ylabel('Z Label')
-    # ax.set_zlabel('Y Label')
-    # ax.set_xlim3d(-0.5, 0.55)
-    # ax.set_ylim3d(-2.2, 3.5)
-    # ax.set_zlim3d(-1.5, 1.0)
-    # plt.savefig('./figs/ave_skeleton.jpg')
+    
     
 
 
