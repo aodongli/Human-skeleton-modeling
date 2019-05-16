@@ -41,6 +41,7 @@ class ChowLiu:
 def main():
     mat = load_skeleton_data()
     skeleton = Skeleton(mat)
+    skeleton.cov_and_mutual_info()
 
     # draw average skeleton
     skeleton.plot_mean_skeleton()
@@ -50,7 +51,6 @@ def main():
     cl.max_span()
     print("Maximum mutual information: %f" % (cl.sum_mutual_info()))
     joint = cl.extract_edges()
-    # print joint
 
     # plot joint learnt by chow-liu algorithm
     skeleton.plot_custom_skeleton(joint, 'chowliu_skeleton')
